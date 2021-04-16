@@ -1,0 +1,22 @@
+h1{
+    text-align: center;
+}
+main {
+    background-color: rgb(151, 183, 243);
+}
+#game-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 60%;
+    height: 800px;
+    margin: 0 auto;
+}
+.space{
+    border: 0.5px black solid;
+    text-align: center;
+    padding: 1.5em 0 0 0;
+    font-size: 4rem;
+}
+.space:hover{
+    background-color: #FFF;
+}
