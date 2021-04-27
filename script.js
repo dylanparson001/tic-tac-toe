@@ -3,26 +3,31 @@
 
 //Factory Function to create players
 const Player = (name) => {
-
-  const getScore = () =>{ // will use to return score
-    return this.score;
+  let score = 0;
+  const incScore = () =>{
+    return score++;
   }
+  const getScore = () =>{ // will use to return score
+    return score;
+  }
+  const getSymbol = () => {
+    return (symbol = _setSymbol());
+  };
   //Player symbol
   const _setSymbol = () => {
     if (name === "1") {
-      this.symbol = "X";
+      symbol = "X";
     } else {
-      this.symbol = "O";
+      symbol = "O";
     }
     return symbol;
   }; // end setSymbol
 
-  const getSymbol = () => {
-    return (symbol = _setSymbol());
-  };
+
   return {
     getSymbol,
     getScore,
+    incScore,
   };
 }; // end Player
 
@@ -33,6 +38,7 @@ const gameBoard = (() => {
 
   const createBoard = () => {
     for (let i = 0; i < board.length; i++) {
+      
       const space = document.createElement("div");
       space.classList.add("space");
       space.id = i;
@@ -40,14 +46,13 @@ const gameBoard = (() => {
     }
   };
   return {
-    board,
     createBoard,
   };
 })(); // end gameBoard
 
 //Module for game control/logic
 const gameController = (() => {
-  //Create two players
+  //Create players
   const _createPlayer = (name) => { 
     return Player(name);
   };
@@ -61,22 +66,27 @@ const gameController = (() => {
     container.appendChild(firstPlayer);
     container.appendChild(secondPlayer);
   }
-  //method for turns
-  const _turnOrder = (player1, player2) => {
-    //do a coin flip to determine who will go first, then alternate player turns after that 
+  const _checkWin = (gameBoard) =>{
 
-  };
+  }
   const ticTacToe = () => {
+    let turnCounter = 1;
     gameBoard.createBoard();
     const spaceList = document.querySelectorAll(".space");
     const player1 = _createPlayer("1");
     const player2 = _createPlayer("2");
-
     _addPlayers(player1, player2);
 
     spaceList.forEach((space) => {
       space.addEventListener("click", () => {
+        if(turnCounter === 1){
         space.textContent = player1.getSymbol(); //testing
+        turnCounter = 2;
+        }
+        else {
+          space.textContent = player2.getSymbol();
+          turnCounter = 1;
+        }
       });
     });
   };
