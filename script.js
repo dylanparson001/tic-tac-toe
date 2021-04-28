@@ -35,6 +35,11 @@ const Player = (name) => {
 const gameBoard = (() => {
   const board = new Array(9);
   const container = document.querySelector("#game-container");
+  
+  const checkWin = () => {
+    //loop through rows, columns, and diagonals
+  
+  }
 
   const createBoard = () => {
     for (let i = 0; i < board.length; i++) {
