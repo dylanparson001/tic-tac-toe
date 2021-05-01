@@ -34,21 +34,8 @@ const Player = (name) => {
 //module to create game board
 const gameBoard = (() => {
   const board = new Array(9);
-  const zero = board[0];
-  const one = board[1];
-  const two = board[2];
-  const three = board[3];
-  const four = board[4];
-  const five = board[5];
-  const six = board[6];
-  const seven = board[7];
-  const eight = board[8];
+
   const container = document.querySelector("#game-container");
-  
-  const checkWin = () => {
-    //loop through rows, columns, and diagonals
-  
-  }
 
   const createBoard = () => {
     for (let i = 0; i < board.length; i++) {
@@ -71,128 +58,132 @@ const gameBoard = (() => {
   //check for win, or tie
   const checkWin = () => {
     let result;
+    const zero = board[0];
+    const one = board[1];
+    const two = board[2];
+    const three = board[3];
+    const four = board[4];
+    const five = board[5];
+    const six = board[6];
+    const seven = board[7];
+    const eight = board[8];
 
-    result = _checkRows();
-    
-    if (result === 'draw') { 
-     result = _checkDiag();
-    } 
-    else if (result === 'draw'){
-    result = _checkCol();
+    result = _checkRows(zero, one, two, three, four, five, six, seven, eight);
+    if (result === "draw") {
+      result = _checkCols(zero, one, two, three, four, five, six, seven, eight);
+    } else if (result === "draw") {
+      result = _checkDiag(zero, one, two, three, four, five, six, seven, eight);
     }
+    return result;
   }; // end checkWin
 
-  const _checkRows = () => {
+  const _checkRows = (zero, one, two, three, four, five, six, seven, eight) => {
     let result;
-    
-    if (zero === one && zero === two) {
+    // if the first option in a row is blank, there cannot be a win in the rows
+    if (zero != "") {
       // checks first row
-      if (zero === 'x') {
-        result = 'x';
-      } if(zero === 'o') {
-        result = "o";
-      }else {
-        result = 'draw';
+      if (zero === one && zero === two) {
+        if (zero === "X") {
+          result = "X";
+        } else if (zero === "O") {
+          result = "O";
+        } else {
+          result = "draw";
+        }
       }
     }
-    if (three === four && three === five) {
-      // checks first row
-      if (three === "x") {
-        result = "x";
-      } if (three === 'o') {
-        result = "o";
-      }
-      else {
-        result = 'draw';
-      }
-    }
-    if (six === seven && six === eight) {
-      // checks first row
-      if (six === "x") {
-        result = "x";
-      } if (six === 'o') {
-        result = "o";
-      }
-      else {
-        result = 'draw';
+    if (three != "") {
+      // checks second row
+      if (three === four && three === five) {
+        if (three === "X") {
+          result = "X";
+        } else if (three === "O") {
+          result = "O";
+        } else {
+          result = "draw";
+        }
       }
     }
-    
+    if (six != "") {
+      // checks third row
+      if (six === seven && six === eight) {
+        if (six === "X") {
+          result = "X";
+        } else if (six === "X") {
+          result = "X";
+        } else {
+          result = "draw";
+        }
+      }
+    }
+
     return result;
   }; // end _checkRows
-  
-  const _checkCol = () =>{
+
+  const _checkCols = (zero, one, two, three, four, five, six, seven, eight) => {
     let result;
-    if (zero === three && zero === six){
-      if (zero === 'x'){
-        result = 'x';
+    if (zero != "") {
+      if (zero === three && zero === six) {
+        if (zero === "X") {
+          result = "X";
+        } else if (zero === "O") {
+          result = "O";
+        } else {
+          result = "draw";
         }
-      if (zero === 'o'){
-        result = 'o';
       }
-      else { 
-      result = 'draw';
-      
     }
-    }
-  if (one === four && one === seven){
-      if (zero === 'x'){
-        result = 'x';
+    if (one != "") {
+      if (one === four && one === seven) {
+        if (zero === "X") {
+          result = "X";
+        } else if (zero === "O") {
+          result = "O";
+        } else {
+          result = "draw";
         }
-      if (zero === 'o'){
-        result = 'o';
       }
-      else { 
-      result = 'draw';
-      
     }
-    }
-    if (two === five && two === eight){
-      if (zero === 'x'){
-        result = 'x';
+    if (two != "") {
+      if (two === five && two === eight) {
+        if (zero === "X") {
+          result = "X";
+        } else if (zero === "O") {
+          result = "O";
+        } else {
+          result = "draw";
         }
-      if (zero === 'o'){
-        result = 'o';
       }
-      else { 
-      result = 'draw';
-      
     }
-    }
-  }
-  
-  const _checkDiag = () => {
-  let result;
-    if (zero === four && zero === eight){
-      if (zero === 'x'){
-        result = 'x';
-        }
-      if (zero === 'o'){
-        result = 'o';
+    return result;
+  };
+
+  const _checkDiag = (zero, one, two, three, four, five, six, seven, eight) => {
+    let result;
+    if (zero === four && zero === eight) {
+      if (zero === "X") {
+        result = "X";
+      } else if (zero === "O") {
+        result = "O";
+      } else {
+        result = "draw";
       }
-      else { 
-      result = 'draw';
-      
-    }
-    }
-  if (two === four && two === six){
-      if (zero === 'x'){
-        result = 'x';
-        }
-      if (zero === 'o'){
-        result = 'o';
+    } else if (two === four && two === six) {
+      if (zero === "X") {
+        result = "X";
+      } else if (zero === "O") {
+        result = "O";
+      } else {
+        result = "draw";
       }
-      else { 
-      result = 'draw';
-      
     }
-    }
-  
-  }
+    return result;
+  };
 
   return {
     createBoard,
     playerChoice,
+    checkWin,
   };
 })(); // end gameBoard
 
@@ -219,7 +210,9 @@ const gameController = (() => {
   };
 
   const ticTacToe = () => {
-    let turnCounter = 1;
+    let turnOrder = 1;
+    let turnCounter = 0;
+    let win = "";
     gameBoard.createBoard();
     const spaceList = document.querySelectorAll(".space");
     const player1 = _createPlayer("1");
@@ -228,19 +221,29 @@ const gameController = (() => {
 
     spaceList.forEach((space) => {
       space.addEventListener("click", () => {
-        if (turnCounter === 1) {
+        if (turnOrder === 1) {
           // checks which player's turn
           if (space.textContent === "") {
             // checks if that space has been chosen
             space.textContent = player1.getSymbol(); //testing
             gameBoard.playerChoice(space, player1.getSymbol());
-            turnCounter = 2;
+            turnCounter++;
+            if (turnCounter >= 5) {
+              win = gameBoard.checkWin();
+              console.log(`${win} wins the game`);
+            }
+            turnOrder = 2;
           }
         } else {
           if (space.textContent === "") {
             space.textContent = player2.getSymbol();
             gameBoard.playerChoice(space, player2.getSymbol());
-            turnCounter = 1;
+            turnCounter++;
+            if (turnCounter >= 5) {
+              win = gameBoard.checkWin();
+              console.log(win);
+            }
+            turnOrder = 1;
           }
         }
       });
