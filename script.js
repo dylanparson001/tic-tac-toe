@@ -70,11 +70,7 @@ const gameBoard = (() => {
 
   //check for win, or tie
   const checkWin = () => {
-<<<<<<< HEAD
-    const result = "";
-=======
     let result;
->>>>>>> f8f30bbc8c690a488728876aae2c44d02566a70c
 
     result = _checkRows();
     
@@ -91,15 +87,6 @@ const gameBoard = (() => {
     
     if (zero === one && zero === two) {
       // checks first row
-<<<<<<< HEAD
-      if (zero === "x") {
-        return "x";
-      }
-      if (zero === "o") {
-        return "o";
-      }
-      return "draw";
-=======
       if (zero === 'x') {
         result = 'x';
       } if(zero === 'o') {
@@ -107,41 +94,21 @@ const gameBoard = (() => {
       }else {
         result = 'draw';
       }
->>>>>>> f8f30bbc8c690a488728876aae2c44d02566a70c
     }
     if (three === four && three === five) {
       // checks first row
       if (three === "x") {
-<<<<<<< HEAD
-        return "x";
-      }
-      if (three === "o") {
-        return "o";
-      } else {
-        return "draw";
-=======
         result = "x";
       } if (three === 'o') {
         result = "o";
       }
       else {
         result = 'draw';
->>>>>>> f8f30bbc8c690a488728876aae2c44d02566a70c
       }
     }
     if (six === seven && six === eight) {
       // checks first row
       if (six === "x") {
-<<<<<<< HEAD
-        return "x";
-      }
-      if (six === "o") {
-        return "o";
-      } else {
-        return "draw";
-      }
-    }
-=======
         result = "x";
       } if (six === 'o') {
         result = "o";
@@ -152,7 +119,6 @@ const gameBoard = (() => {
     }
     
     return result;
->>>>>>> f8f30bbc8c690a488728876aae2c44d02566a70c
   }; // end _checkRows
   
   const _checkCol = () =>{
