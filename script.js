@@ -65,7 +65,7 @@ const gameBoard = (() => {
 
   //check for win, or tie
   const checkWin = () => {
-    const result;
+    const result = "";
 
     result = _checkRows();
   }; // end checkWin
@@ -75,34 +75,34 @@ const gameBoard = (() => {
       // checks first row
       if (zero === "x") {
         return "x";
-      } if(zero === 'o') {
+      }
+      if (zero === "o") {
         return "o";
       }
-      return 'draw';
+      return "draw";
     }
     if (three === four && three === five) {
       // checks first row
       if (three === "x") {
         return "x";
-      } if (three === 'o') {
-        return "o";
       }
-      else {
-        return 'draw';
+      if (three === "o") {
+        return "o";
+      } else {
+        return "draw";
       }
     }
     if (six === seven && six === eight) {
       // checks first row
       if (six === "x") {
         return "x";
-      } if (six === 'o') {
-        return "o";
       }
-      else {
-        return 'draw';
+      if (six === "o") {
+        return "o";
+      } else {
+        return "draw";
       }
     }
-
   }; // end _checkRows
 
   return {
