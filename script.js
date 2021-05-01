@@ -44,6 +44,11 @@ const gameBoard = (() => {
   const seven = board[7];
   const eight = board[8];
   const container = document.querySelector("#game-container");
+  
+  const checkWin = () => {
+    //loop through rows, columns, and diagonals
+  
+  }
 
   const createBoard = () => {
     for (let i = 0; i < board.length; i++) {
@@ -65,14 +70,28 @@ const gameBoard = (() => {
 
   //check for win, or tie
   const checkWin = () => {
+<<<<<<< HEAD
     const result = "";
+=======
+    let result;
+>>>>>>> f8f30bbc8c690a488728876aae2c44d02566a70c
 
     result = _checkRows();
+    
+    if (result === 'draw') { 
+     result = _checkDiag();
+    } 
+    else if (result === 'draw'){
+    result = _checkCol();
+    }
   }; // end checkWin
 
   const _checkRows = () => {
+    let result;
+    
     if (zero === one && zero === two) {
       // checks first row
+<<<<<<< HEAD
       if (zero === "x") {
         return "x";
       }
@@ -80,21 +99,40 @@ const gameBoard = (() => {
         return "o";
       }
       return "draw";
+=======
+      if (zero === 'x') {
+        result = 'x';
+      } if(zero === 'o') {
+        result = "o";
+      }else {
+        result = 'draw';
+      }
+>>>>>>> f8f30bbc8c690a488728876aae2c44d02566a70c
     }
     if (three === four && three === five) {
       // checks first row
       if (three === "x") {
+<<<<<<< HEAD
         return "x";
       }
       if (three === "o") {
         return "o";
       } else {
         return "draw";
+=======
+        result = "x";
+      } if (three === 'o') {
+        result = "o";
+      }
+      else {
+        result = 'draw';
+>>>>>>> f8f30bbc8c690a488728876aae2c44d02566a70c
       }
     }
     if (six === seven && six === eight) {
       // checks first row
       if (six === "x") {
+<<<<<<< HEAD
         return "x";
       }
       if (six === "o") {
@@ -103,7 +141,88 @@ const gameBoard = (() => {
         return "draw";
       }
     }
+=======
+        result = "x";
+      } if (six === 'o') {
+        result = "o";
+      }
+      else {
+        result = 'draw';
+      }
+    }
+    
+    return result;
+>>>>>>> f8f30bbc8c690a488728876aae2c44d02566a70c
   }; // end _checkRows
+  
+  const _checkCol = () =>{
+    let result;
+    if (zero === three && zero === six){
+      if (zero === 'x'){
+        result = 'x';
+        }
+      if (zero === 'o'){
+        result = 'o';
+      }
+      else { 
+      result = 'draw';
+      
+    }
+    }
+  if (one === four && one === seven){
+      if (zero === 'x'){
+        result = 'x';
+        }
+      if (zero === 'o'){
+        result = 'o';
+      }
+      else { 
+      result = 'draw';
+      
+    }
+    }
+    if (two === five && two === eight){
+      if (zero === 'x'){
+        result = 'x';
+        }
+      if (zero === 'o'){
+        result = 'o';
+      }
+      else { 
+      result = 'draw';
+      
+    }
+    }
+  }
+  
+  const _checkDiag = () => {
+  let result;
+    if (zero === four && zero === eight){
+      if (zero === 'x'){
+        result = 'x';
+        }
+      if (zero === 'o'){
+        result = 'o';
+      }
+      else { 
+      result = 'draw';
+      
+    }
+    }
+  if (two === four && two === six){
+      if (zero === 'x'){
+        result = 'x';
+        }
+      if (zero === 'o'){
+        result = 'o';
+      }
+      else { 
+      result = 'draw';
+      
+    }
+    }
+  
+  }
 
   return {
     createBoard,
