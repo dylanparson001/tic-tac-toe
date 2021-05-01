@@ -70,45 +70,125 @@ const gameBoard = (() => {
 
   //check for win, or tie
   const checkWin = () => {
-    const result;
+    let result;
 
     result = _checkRows();
+    
+    if (result === 'draw') { 
+     result = _checkDiag();
+    } 
+    else if (result === 'draw'){
+    result = _checkCol();
+    }
   }; // end checkWin
 
   const _checkRows = () => {
+    let result;
+    
     if (zero === one && zero === two) {
       // checks first row
-      if (zero === "x") {
-        return "x";
+      if (zero === 'x') {
+        result = 'x';
       } if(zero === 'o') {
-        return "o";
+        result = "o";
+      }else {
+        result = 'draw';
       }
-      return 'draw';
     }
     if (three === four && three === five) {
       // checks first row
       if (three === "x") {
-        return "x";
+        result = "x";
       } if (three === 'o') {
-        return "o";
+        result = "o";
       }
       else {
-        return 'draw';
+        result = 'draw';
       }
     }
     if (six === seven && six === eight) {
       // checks first row
       if (six === "x") {
-        return "x";
+        result = "x";
       } if (six === 'o') {
-        return "o";
+        result = "o";
       }
       else {
-        return 'draw';
+        result = 'draw';
       }
     }
-
+    
+    return result;
   }; // end _checkRows
+  
+  const _checkCol = () =>{
+    let result;
+    if (zero === three && zero === six){
+      if (zero === 'x'){
+        result = 'x';
+        }
+      if (zero === 'o'){
+        result = 'o';
+      }
+      else { 
+      result = 'draw';
+      
+    }
+    }
+  if (one === four && one === seven){
+      if (zero === 'x'){
+        result = 'x';
+        }
+      if (zero === 'o'){
+        result = 'o';
+      }
+      else { 
+      result = 'draw';
+      
+    }
+    }
+    if (two === five && two === eight){
+      if (zero === 'x'){
+        result = 'x';
+        }
+      if (zero === 'o'){
+        result = 'o';
+      }
+      else { 
+      result = 'draw';
+      
+    }
+    }
+  }
+  
+  const _checkDiag = () => {
+  let result;
+    if (zero === four && zero === eight){
+      if (zero === 'x'){
+        result = 'x';
+        }
+      if (zero === 'o'){
+        result = 'o';
+      }
+      else { 
+      result = 'draw';
+      
+    }
+    }
+  if (two === four && two === six){
+      if (zero === 'x'){
+        result = 'x';
+        }
+      if (zero === 'o'){
+        result = 'o';
+      }
+      else { 
+      result = 'draw';
+      
+    }
+    }
+  
+  }
 
   return {
     createBoard,
