@@ -71,7 +71,8 @@ const gameBoard = (() => {
     result = _checkRows(zero, one, two, three, four, five, six, seven, eight);
     if (result === "draw") {
       result = _checkCols(zero, one, two, three, four, five, six, seven, eight);
-    } else if (result === "draw") {
+    }
+    if (result === "draw") {
       result = _checkDiag(zero, one, two, three, four, five, six, seven, eight);
     }
     return result;
@@ -225,7 +226,7 @@ const gameController = (() => {
           // checks which player's turn
           if (space.textContent === "") {
             // checks if that space has been chosen
-            space.textContent = player1.getSymbol(); //testing
+            space.textContent = player1.getSymbol();
             gameBoard.playerChoice(space, player1.getSymbol());
             turnCounter++;
             if (turnCounter >= 5) {
