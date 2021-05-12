@@ -227,22 +227,26 @@ const gameController = (() => {
     const player2 = _createPlayer("2");
     _addPlayers(player1, player2);
 
-    //main game logic, adds event listener for each space
+    //adds event listener for each space
+    // I may add this functionality into a method for more encapsulation, and keep the code cleaner
     spaceList.forEach((space) => { 
       space.addEventListener("click", () => {
+        //if a winner has not been identified, the turns will continue
         if (win === "" || win === undefined) {
+          //display to show the users whos move it is
           if (turnOrder == 1) {
             gameBoard.display(`Next player: ${player2.getSymbol()}`);
           } else {
             gameBoard.display(`Next player: ${player1.getSymbol()}`);
           }
+          // checks which player's turn
           if (turnOrder === 1) {
-            // checks which player's turn
+            // checks if that space has been chosen
             if (space.textContent === "") {
-              // checks if that space has been chosen
-              space.textContent = player1.getSymbol(); //testing
+              space.textContent = player1.getSymbol();
               gameBoard.playerChoice(space, player1.getSymbol());
               turnCounter++;
+              //a winner cannot happen in less than five turns, no need to check for winners until that point
               if (turnCounter >= 5) {
                 win = gameBoard.checkWin();
                 console.log(`${win} wins the game`);
@@ -250,6 +254,7 @@ const gameController = (() => {
               turnOrder = 2;
             }
           } else {
+            // same as before but for player 2
             if (space.textContent === "") {
               space.textContent = player2.getSymbol();
               gameBoard.playerChoice(space, player2.getSymbol());
@@ -262,7 +267,8 @@ const gameController = (() => {
             }
           }
         }
-        if(win === "X" || win === "O") {
+        // when the winner has been identified, display the winner
+         if(win === "X" || win === "O") {
           gameBoard.display(`${win} has won`);
         }
       });
