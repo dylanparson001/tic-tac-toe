@@ -55,6 +55,11 @@ const gameBoard = (() => {
     }
   };
 
+  const display = (symbol) => {
+    const playerDisplay = document.querySelector("#current-player");
+    playerDisplay.textContent = symbol;
+  };
+
   //check for win, or tie
   const checkWin = () => {
     let result;
@@ -69,9 +74,11 @@ const gameBoard = (() => {
     const eight = board[8];
 
     result = _checkRows(zero, one, two, three, four, five, six, seven, eight);
-    if (result === "draw") {
+    if (result === undefined) {
       result = _checkCols(zero, one, two, three, four, five, six, seven, eight);
-    } else if (result === "draw") {
+      console.log(result);
+    }
+    if (result === undefined) {
       result = _checkDiag(zero, one, two, three, four, five, six, seven, eight);
     }
     return result;
@@ -135,9 +142,9 @@ const gameBoard = (() => {
     }
     if (one != "") {
       if (one === four && one === seven) {
-        if (zero === "X") {
+        if (one === "X") {
           result = "X";
-        } else if (zero === "O") {
+        } else if (one === "O") {
           result = "O";
         } else {
           result = "draw";
@@ -146,9 +153,9 @@ const gameBoard = (() => {
     }
     if (two != "") {
       if (two === five && two === eight) {
-        if (zero === "X") {
+        if (two === "X") {
           result = "X";
-        } else if (zero === "O") {
+        } else if (two === "O") {
           result = "O";
         } else {
           result = "draw";
@@ -169,9 +176,9 @@ const gameBoard = (() => {
         result = "draw";
       }
     } else if (two === four && two === six) {
-      if (zero === "X") {
+      if (two === "X") {
         result = "X";
-      } else if (zero === "O") {
+      } else if (two === "O") {
         result = "O";
       } else {
         result = "draw";
@@ -184,6 +191,7 @@ const gameBoard = (() => {
     createBoard,
     playerChoice,
     checkWin,
+    display,
   };
 })(); // end gameBoard
 
@@ -219,32 +227,43 @@ const gameController = (() => {
     const player2 = _createPlayer("2");
     _addPlayers(player1, player2);
 
-    spaceList.forEach((space) => {
+    //main game logic, adds event listener for each space
+    spaceList.forEach((space) => { 
       space.addEventListener("click", () => {
-        if (turnOrder === 1) {
-          // checks which player's turn
-          if (space.textContent === "") {
-            // checks if that space has been chosen
-            space.textContent = player1.getSymbol(); //testing
-            gameBoard.playerChoice(space, player1.getSymbol());
-            turnCounter++;
-            if (turnCounter >= 5) {
-              win = gameBoard.checkWin();
-              console.log(`${win} wins the game`);
-            }
-            turnOrder = 2;
+        if (win === "" || win === undefined) {
+          if (turnOrder == 1) {
+            gameBoard.display(`Next player: ${player2.getSymbol()}`);
+          } else {
+            gameBoard.display(`Next player: ${player1.getSymbol()}`);
           }
-        } else {
-          if (space.textContent === "") {
-            space.textContent = player2.getSymbol();
-            gameBoard.playerChoice(space, player2.getSymbol());
-            turnCounter++;
-            if (turnCounter >= 5) {
-              win = gameBoard.checkWin();
-              console.log(win);
+          if (turnOrder === 1) {
+            // checks which player's turn
+            if (space.textContent === "") {
+              // checks if that space has been chosen
+              space.textContent = player1.getSymbol(); //testing
+              gameBoard.playerChoice(space, player1.getSymbol());
+              turnCounter++;
+              if (turnCounter >= 5) {
+                win = gameBoard.checkWin();
+                console.log(`${win} wins the game`);
+              }
+              turnOrder = 2;
             }
-            turnOrder = 1;
+          } else {
+            if (space.textContent === "") {
+              space.textContent = player2.getSymbol();
+              gameBoard.playerChoice(space, player2.getSymbol());
+              turnCounter++;
+              if (turnCounter >= 5) {
+                win = gameBoard.checkWin();
+                console.log(win);
+              }
+              turnOrder = 1;
+            }
           }
+        }
+        if(win === "X" || win === "O") {
+          gameBoard.display(`${win} has won`);
         }
       });
     });
