@@ -33,7 +33,8 @@ const Player = (name) => {
 
 //module to create game board
 const gameBoard = (() => {
-  const board = new Array(9);
+  // new Array object
+  const board = new Array(9); 
 
   const container = document.querySelector("#game-container");
 
