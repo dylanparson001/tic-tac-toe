@@ -8,7 +8,7 @@ main {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     width: 100%;
-    height: 800px;
+    height: 80vh;
     margin: 0 auto;
 }
 .space{
@@ -16,7 +16,23 @@ main {
     text-align: center;
     padding: 1.5em 0 0 0;
     font-size: 4rem;
+    background-color: blue;
 }
 .space:hover{
     background-color: #FFF;
+}
+.continue-hidden {
+    position: fixed;
+    text-align: center;
+    margin: 0 auto;
+    background-color: rgb(85, 63, 63);
+    color: rgb(255, 255, 255);
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display:none;
+}
+.buttons {
+    width: 25%;
+    margin: 0 auto;
 }

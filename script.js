@@ -33,8 +33,7 @@ const Player = (name) => {
 
 //module to create game board
 const gameBoard = (() => {
-  // new Array object
-  const board = new Array(9); 
+  const board = new Array(9);
 
   const container = document.querySelector("#game-container");
 
@@ -54,11 +53,6 @@ const gameBoard = (() => {
       board[choice.id] = symbol;
       console.log(board);
     }
-  };
-
-  const display = (symbol) => {
-    const playerDisplay = document.querySelector("#current-player");
-    playerDisplay.textContent = symbol;
   };
 
   //check for win, or tie
@@ -192,7 +186,6 @@ const gameBoard = (() => {
     createBoard,
     playerChoice,
     checkWin,
-    display,
   };
 })(); // end gameBoard
 
@@ -202,44 +195,36 @@ const gameController = (() => {
   const _createPlayer = (name) => {
     return Player(name);
   };
-  // add players to dom
-  const _addPlayers = (player1, player2) => {
-    const container = document.getElementById("players");
-    const firstPlayer = document.createElement("h2");
-    const secondPlayer = document.createElement("h2");
 
-    firstPlayer.id = "player-1";
-    secondPlayer.id = "player-2";
+  const _continue = () => {};
 
-    firstPlayer.textContent = `Player 1: ${player1.getScore()}`;
-    secondPlayer.textContent = `Player 2: ${player2.getScore()}`;
-
-    container.appendChild(firstPlayer);
-    container.appendChild(secondPlayer);
+  const _showContScreen = (contScreen, player1, player2) =>{
+    contScreen.style.display = "block";
+    const domPlayer1 = document.querySelector("#player1");
+    const domPlayer2 = document.querySelector("#player2")
+    domPlayer1.textContent = `Player 1: ${player1.getScore()}`; 
+    domPlayer2.textContent = `Player 2: ${player2.getScore()}`; 
   };
+  const _hideContScreen = (contScreen) =>{
+    contScreen.style.display = "none";
+  }
 
   const ticTacToe = () => {
     let turnOrder = 1;
     let turnCounter = 0;
     let win = "";
+    const contScreen = document.querySelector(".continue-hidden");
+    let cont = true; // continue
     gameBoard.createBoard();
     const spaceList = document.querySelectorAll(".space");
     const player1 = _createPlayer("1");
-    const player2 = _createPlayer("2");
-    _addPlayers(player1, player2);
+    const player2 = _createPlayer("2"); 
 
     //adds event listener for each space
-    // I may add this functionality into a method for more encapsulation, and keep the code cleaner
-    spaceList.forEach((space) => { 
+    spaceList.forEach((space) => {
       space.addEventListener("click", () => {
         //if a winner has not been identified, the turns will continue
         if (win === "" || win === undefined) {
-          //display to show the users whos move it is
-          if (turnOrder == 1) {
-            gameBoard.display(`Next player: ${player2.getSymbol()}`);
-          } else {
-            gameBoard.display(`Next player: ${player1.getSymbol()}`);
-          }
           // checks which player's turn
           if (turnOrder === 1) {
             // checks if that space has been chosen
@@ -269,13 +254,21 @@ const gameController = (() => {
           }
         }
         // when the winner has been identified, display the winner
-         if(win === "X" || win === "O") {
-          gameBoard.display(`${win} has won`);
+        if (win === "X" || win === "O" ||turnCounter > 8) {
+          switch(win){
+            case "X":
+              player1.incScore();
+              break;
+            case "O":
+              player2.incScore();
+              break;
+          }
+          _showContScreen(contScreen, player1, player2);
+          const yes = document.querySelector("#yes");
         }
       });
     });
   };
-
   return {
     ticTacToe,
   };

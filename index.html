@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel = "stylesheet" href = "style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tic-Tac-Toe</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>TIC TAC TOE</h1>
-    <h4 id = "players">
-
-    </h4>
-    <h4 id = "current-player">
-
-    </h4>
-    <main id = "game-container">
-
-    </main>
-    <script src = "script.js"></script>
-</body>
+    <div id="hud">
+      <h4 id="players"></h4>
+      <h4 id="current-player"></h4>
+    </div>
+    <div class="continue-hidden">
+      <h1>Game over!</h1>
+      <h3 id="final-scores">Final Scores</h3>
+      <p id="player1"></p>
+      <p id="player2"></p>
+      <h3>Continue?</h3>
+      <button class="buttons" id="yes" value="yes">Yes</button>
+    </div>
+    <main id="game-container"></main>
+    <script src="script.js"></script>
+  </body>
 </html>
