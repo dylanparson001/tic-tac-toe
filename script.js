@@ -46,6 +46,9 @@ const gameBoard = (() => {
       container.appendChild(space);
     }
   };
+  const eraseBoard = (board) =>{
+    board.textContent = ""; // erases previous board
+  }
 
   const playerChoice = (choice, symbol) => {
     if (board[choice.id] === "") {
@@ -111,8 +114,8 @@ const gameBoard = (() => {
       if (six === seven && six === eight) {
         if (six === "X") {
           result = "X";
-        } else if (six === "X") {
-          result = "X";
+        } else if (six === "O") {
+          result = "O";
         } else {
           result = "draw";
         }
@@ -186,6 +189,7 @@ const gameBoard = (() => {
     createBoard,
     playerChoice,
     checkWin,
+    eraseBoard,
   };
 })(); // end gameBoard
 
@@ -195,6 +199,8 @@ const gameController = (() => {
   const _createPlayer = (name) => {
     return Player(name);
   };
+  const player1 = _createPlayer("1");
+  const player2 = _createPlayer("2");
 
   const _continue = () => {};
 
@@ -209,6 +215,10 @@ const gameController = (() => {
     contScreen.style.display = "none";
   }
 
+  const _playAgain = (board) => {
+    ticTacToe();
+  }
+
   const ticTacToe = () => {
     let turnOrder = 1;
     let turnCounter = 0;
@@ -217,8 +227,7 @@ const gameController = (() => {
     let cont = true; // continue
     gameBoard.createBoard();
     const spaceList = document.querySelectorAll(".space");
-    const player1 = _createPlayer("1");
-    const player2 = _createPlayer("2"); 
+     
 
     //adds event listener for each space
     spaceList.forEach((space) => {
@@ -262,9 +271,17 @@ const gameController = (() => {
             case "O":
               player2.incScore();
               break;
+            case "draw":
+              break;
           }
           _showContScreen(contScreen, player1, player2);
           const yes = document.querySelector("#yes");
+          yes.addEventListener("click", () => {
+            let board = document.querySelector("#game-container");
+            _hideContScreen(contScreen);
+            gameBoard.eraseBoard(board);
+            _playAgain(board);
+          });
         }
       });
     });
