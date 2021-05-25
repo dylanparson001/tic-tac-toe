@@ -1,5 +1,9 @@
+body{
+    background-color: rgba(12, 74, 116, 0.7);
+}
 h1{
     text-align: center;
+    color:rgb(255,255,255)
 }
 main {
     background-color: rgb(151, 183, 243);
@@ -7,16 +11,19 @@ main {
 #game-container{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    width: 100%;
+    width: 80%;
     height: 80vh;
     margin: 0 auto;
 }
 .space{
     border: 5px black solid;
     text-align: center;
-    padding: 1.5em 0 0 0;
+    padding: 1.2em;
     font-size: 4rem;
     background-color: rgb(151, 183, 243);
+}
+.space-active{
+    padding: 0.7em;
 }
 .space:hover{
     background-color: #FFF;
@@ -27,8 +34,8 @@ main {
     margin: 0 auto;
     background-color: rgb(85, 63, 63, 0.90);
     color: rgb(252, 255, 74);
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     z-index: 2;
     display:none;
 }

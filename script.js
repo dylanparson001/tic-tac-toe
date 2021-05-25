@@ -239,12 +239,12 @@ const gameController = (() => {
             // checks if that space has been chosen
             if (space.textContent === "") {
               space.textContent = player1.getSymbol();
+              space.classList.add("space-active");
               gameBoard.playerChoice(space, player1.getSymbol());
               turnCounter++;
               //a winner cannot happen in less than five turns, no need to check for winners until that point
               if (turnCounter >= 5) {
                 win = gameBoard.checkWin();
-                console.log(`${win} wins the game`);
               }
               turnOrder = 2;
             }
@@ -252,6 +252,7 @@ const gameController = (() => {
             // same as before but for player 2
             if (space.textContent === "") {
               space.textContent = player2.getSymbol();
+              space.classList.add("space-active");
               gameBoard.playerChoice(space, player2.getSymbol());
               turnCounter++;
               if (turnCounter >= 5) {
